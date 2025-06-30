@@ -1,0 +1,476 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  --main-bg: #f5f8fa;
+  --main-bg-dark: #25282c;
+  --main-fg: #21243a;
+  --main-fg-dark: #f5f8fa;
+  --accent: #228be6;
+  --accent-light: #91caff;
+  --accent-bg: #e6f4ff;
+  --card-bg: #fff;
+  --card-bg-dark: #333940;
+  --input-bg: #f5f7fa;
+  --input-bg-dark: #292b30;
+  --header-bg: #228be6;
+  --header-fg: #fff;
+  --border-radius: 14px;
+  --shadow: 0 2px 16px 0 #0001;
+  --side-padding: 16px;
+  --side-padding-mobile: 6px;
+  --container-max: 650px;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: var(--main-bg);
+  color: var(--main-fg);
+  transition: background 0.2s, color 0.2s;
+  overflow-x: hidden;
+}
+
+a {
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: inherit;
+}
+a:hover {
+  color: #1862ab;
+}
+
+h1 {
+  font-size: 2.5em;
+  line-height: 1.1;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 18px;
+  letter-spacing: -1px;
+  word-break: break-word;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.25s, color 0.2s;
+  outline: none;
+  max-width: 100%;
+  word-break: break-word;
+}
+button:hover,
+button:focus-visible {
+  background: var(--accent-light);
+  color: #222;
+  border-color: var(--accent);
+}
+button:active {
+  filter: brightness(0.92);
+}
+
+/* Main container centrat */
+.main-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 40px auto;
+  background: var(--card-bg);
+  padding: 32px var(--side-padding);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background 0.2s;
+  box-sizing: border-box;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* HEADER completament responsive */
+header {
+  width: 100vw;
+  min-width: 0;
+  background: var(--header-bg);
+  color: var(--header-fg);
+  padding: 18px 0;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 8px #0002;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+header nav {
+  max-width: var(--container-max, 650px);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: var(--side-padding, 16px);
+  width: 100%;
+  box-sizing: border-box;
+  gap: 10px;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.header-link {
+  color: var(--header-fg);
+  background: none;
+  border: none;
+  font-size: 1.1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s;
+  text-decoration: none;
+  padding: 0;
+}
+.header-link:hover, .header-link.active {
+  color: #ffec99;
+}
+.app-title {
+  font-size: 1.6em;
+  font-weight: bold;
+  letter-spacing: -1px;
+  text-decoration: none;
+  color: var(--header-fg);
+}
+
+/* Usuari a la dreta */
+.user-select-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+.user-select {
+  padding: 5px 8px;
+  border-radius: 7px;
+  font-size: 1em;
+  margin-bottom: 3px;
+  border: 1.2px solid #ddd;
+  background: #fff;
+  color: #222;
+}
+.add-user-btn, .user-select-area > button {
+  background: #ffbe76;
+  color: #444;
+  border: none;
+  padding: 0.45em 1em;
+  border-radius: 6px;
+  font-size: 0.98em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s;
+  margin-top: 1px;
+}
+.add-user-btn:hover, .user-select-area > button:hover {
+  background: #ffd28d;
+  color: #222;
+}
+
+/* Responsive: mòbil i tablets */
+@media (max-width: 900px) {
+  .main-container {
+    max-width: 98vw;
+    padding: 18px var(--side-padding);
+    margin: 28px auto;
+  }
+  header nav {
+    gap: 15px;
+    font-size: 1.09em;
+    padding-inline: var(--side-padding-mobile);
+  }
+  .header-left {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-container {
+    max-width: 100vw;
+    border-radius: 0;
+    padding: 10px var(--side-padding-mobile);
+    margin: 10px 0;
+  }
+  header nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .header-left {
+    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .user-select-area {
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 6px;
+  }
+  .app-title {
+    font-size: 1.2em;
+  }
+}
+
+/* --- RESTA DEL CSS (calendari, llistes, etc. com ja el tenies) --- */
+
+/* Dashboard */
+.dashboard {
+  padding: 16px 24px;
+  margin-bottom: 24px;
+  background: var(--accent-bg);
+  border-radius: 10px;
+  box-shadow: 0 1px 8px 0 #0001;
+  width: 100%;
+  box-sizing: border-box;
+  color: #1862ab;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+/* Calendar bar amb navegació */
+.calendar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 16px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.calendar-nav button {
+  background: #f6f8fa;
+  color: var(--accent);
+  padding: 0.2em 0.7em;
+  border-radius: 6px;
+  font-size: 1.1em;
+  border: 1px solid #d0d7de;
+  transition: 0.2s;
+  max-width: 100%;
+  min-width: 0;
+}
+.calendar-nav span {
+  font-size: 1.15em;
+  font-weight: 500;
+  color: var(--main-fg);
+  word-break: break-word;
+}
+
+/* Barra del calendari estil modern */
+.calendar-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 16px;
+  justify-content: center;
+  padding: 5px 0;
+  min-width: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.calendar-bar button {
+  min-width: 35px;
+  height: 35px;
+  padding: 0;
+  border-radius: 50%;
+  background: #f6f8fa;
+  border: 1.5px solid #d0d7de;
+  color: #213547;
+  font-weight: 500;
+  font-size: 1em;
+  transition: 0.15s;
+  outline: none;
+  box-shadow: 0px 1px 3px #0001;
+  position: relative;
+  max-width: 100%;
+  word-break: break-word;
+}
+.calendar-bar button.selected,
+.calendar-bar button:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: #1862ab;
+  font-weight: 700;
+  box-shadow: 0px 2px 8px #228be622;
+}
+.calendar-bar button:focus-visible {
+  outline: 2px solid var(--accent);
+}
+
+.calendar-bar button.today {
+  border: 2px solid #ffbe76;
+  box-shadow: 0 0 0 2px #fff, 0 1px 3px #0001;
+}
+
+/* Dies amb tasca destacats */
+.calendar-bar button.has-task {
+  background: #ffe59e;
+  border: 2px solid #eab308;
+  color: #ad6b00;
+  font-weight: bold;
+  position: relative;
+}
+.calendar-bar button.has-task::after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  margin-top: 2px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffa600;
+}
+
+/* Task list */
+.task-list {
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  overflow-x: auto;
+}
+.task-list li {
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  background: var(--accent-bg);
+  border-radius: 8px;
+  box-shadow: 0 1px 4px 0 #0001;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #222;
+  gap: 12px;
+  min-height: 38px;
+  min-width: 0;
+  overflow-x: auto;
+  word-break: break-word;
+}
+.task-list li .actions {
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+}
+.task-list li[style*="line-through"] {
+  opacity: 0.6;
+}
+
+/* Task form */
+.task-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 16px;
+  width: 100%;
+  min-width: 0;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+.task-form input {
+  padding: 7px 10px;
+  border-radius: 7px;
+  border: 1.2px solid #ccc;
+  font-size: 1em;
+  background: var(--input-bg);
+  flex: 1 1 auto;
+  transition: border-color 0.2s, background 0.2s;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.task-form input:focus {
+  border-color: var(--accent);
+  background: #fff;
+  outline: none;
+}
+
+.task-list .actions button[title="Elimina"] {
+  background: #ff5f5f;
+  color: #fff;
+  border: none;
+  min-width: 32px;
+}
+.task-list .actions button[title="Elimina"]:hover {
+  background: #d90429;
+}
+
+/* DARK MODE */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-bg: #25282c;
+    --main-fg: #f5f8fa;
+    --card-bg: #333940;
+    --input-bg: #292b30;
+  }
+  body {
+    background: var(--main-bg);
+    color: var(--main-fg);
+  }
+  h1 {
+    color: var(--accent-light);
+  }
+  .main-container {
+    background: var(--card-bg);
+  }
+  .dashboard {
+    background: #18477e;
+    color: #fff;
+  }
+  .calendar-nav button {
+    background: #22242a;
+    color: var(--accent-light);
+    border: 1px solid #3a4251;
+  }
+  .calendar-bar button {
+    background: #22242a;
+    color: #eee;
+    border: 1.5px solid #3a4251;
+  }
+  .calendar-bar button.selected,
+  .calendar-bar button:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent-light);
+  }
+  .calendar-bar button.has-task {
+    background: #554400;
+    border: 2px solid #ffd900;
+    color: #ffe59e;
+  }
+  .calendar-bar button.has-task::after {
+    background: #ffd900;
+  }
+  .task-list li {
+    background: #22242a;
+    color: #eee;
+  }
+  .task-form input {
+    background: var(--input-bg);
+    color: #fff;
+  }
+}
