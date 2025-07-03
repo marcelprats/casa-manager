@@ -1,0 +1,210 @@
+:root {
+  --main-green: #42b983;
+  --header-bg: #fff;
+  --header-fg: #111;
+  --header-active: var(--main-green);
+  --header-border: #eee;
+}
+
+header {
+  background: var(--header-bg);
+  color: var(--header-fg);
+  box-shadow: 0 2px 8px #0002;
+  border-bottom: 1.5px solid var(--header-border);
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+
+.header-nav {
+  max-width: 650px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  min-height: 56px;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.app-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  letter-spacing: -1px;
+  text-decoration: none;
+  color: var(--header-fg);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  transition: color 0.18s;
+}
+.app-title:hover,
+.app-title:focus-visible {
+  color: var(--main-green);
+  text-decoration: underline;
+}
+
+/* HAMBURGER */
+.hamburger-btn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 150;
+  margin-left: 10px;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.hamburger-box {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  position: relative;
+}
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: -12px;
+  width: 32px;
+  height: 24px;
+  position: absolute;
+}
+.hamburger-bar {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: #111;
+  transition: transform 0.3s cubic-bezier(.4,2,.6,1), opacity 0.24s cubic-bezier(.4,2,.6,1);
+}
+.hamburger-bar:nth-child(1) { top: 0; }
+.hamburger-bar:nth-child(2) { top: 10px; }
+.hamburger-bar:nth-child(3) { top: 20px; }
+.hamburger-btn.open .hamburger-bar:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+.hamburger-btn.open .hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-btn.open .hamburger-bar:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+/* Menu principal */
+.header-menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  transition: none;
+}
+
+@media (max-width: 750px) {
+  .header-nav {
+    min-height: 48px;
+  }
+  .hamburger-btn {
+    display: block;
+  }
+  .header-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 92vw;
+    max-width: 420px;
+    background: var(--header-bg, #fff);
+    box-shadow: 0 8px 32px #0002, 0 2px 8px #0001;
+    border-radius: 0 0 18px 18px;
+    z-index: 120;
+    padding: 18px 0 18px 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -10px) scale(0.98);
+    gap: 0;
+    border: 1.5px solid var(--header-border, #eee);
+  }
+  .header-menu.open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, 0) scale(1);
+    transition: opacity 0.2s, transform 0.18s;
+  }
+  .header-link,
+  .add-user-btn,
+  .user-select-area {
+    margin-left: 24px;
+    margin-top: 16px;
+    margin-bottom: 0;
+    width: calc(100% - 48px);
+  }
+  .header-link {
+    border-radius: 8px;
+    padding: 12px 0 12px 10px;
+    font-size: 1.13em;
+    height: auto;
+    border-bottom: none;
+    transition: background 0.13s, color 0.18s;
+  }
+  .header-link.active, .header-link:focus-visible {
+    color: var(--main-green);
+    background: #e8f8f2;
+    outline: none;
+  }
+  .header-link:hover:not(.active) {
+    color: var(--main-green);
+    background: #f6fcfa;
+  }
+  .user-select-area {
+    align-items: flex-start;
+    margin-top: 18px;
+    width: 92%;
+  }
+}
+@media (max-width: 420px) {
+  .app-title {
+    font-size: 0.99em;
+  }
+}
+
+/* la resta dels estils (user-select, add-user-btn, etc) iguals com abans */
+.user-select-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+.user-select {
+  padding: 5px 8px;
+  border-radius: 7px;
+  font-size: 1em;
+  margin-bottom: 3px;
+  border: 1.2px solid #bbb;
+  background: #fff;
+  color: #111;
+}
+.add-user-btn, .user-select-area > button {
+  background: var(--main-green);
+  color: #fff;
+  border: none;
+  padding: 0.45em 1em;
+  border-radius: 6px;
+  font-size: 0.98em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  margin-top: 1px;
+}
+.add-user-btn:hover,
+.user-select-area > button:hover {
+  background: #25946a;
+  color: #fff;
+}

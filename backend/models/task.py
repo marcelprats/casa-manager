@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
 from backend.database.db import Base
 
 class Task(Base):
@@ -10,3 +10,4 @@ class Task(Base):
     data_fi = Column(String, nullable=True)
     periodicitat = Column(String, nullable=True)
     usuari_id = Column(Integer, ForeignKey("users.id"))
+    feta = Column(Boolean, default=False)

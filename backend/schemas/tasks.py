@@ -8,6 +8,7 @@ class TaskCreate(BaseModel):
     data_fi: Optional[str]
     periodicitat: Optional[str]
     usuari_id: int
+    feta: Optional[bool] = False
 
 class TaskRead(TaskCreate):
     id: int
