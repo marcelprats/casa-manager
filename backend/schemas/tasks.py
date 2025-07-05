@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 
 class TaskCreate(BaseModel):
     titol: str
@@ -7,7 +7,7 @@ class TaskCreate(BaseModel):
     data_inici: str
     data_fi: Optional[str]
     periodicitat: Optional[str]
-    usuari_id: int
+    usuaris_id: List[int]  # <-- llista d’IDs d’usuaris!
     feta: Optional[bool] = False
 
 class TaskRead(TaskCreate):

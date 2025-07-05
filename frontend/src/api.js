@@ -5,6 +5,12 @@ export async function fetchTasks() {
   return res.json();
 }
 
+export async function fetchTask(id) {
+  const res = await fetch(`http://localhost:8000/tasks/${id}`);
+  if (!res.ok) throw new Error("No s'ha pogut carregar la tasca");
+  return await res.json();
+}
+
 export async function addTask(task) {
   // Si no especifiques 'feta', la backend la posarà a false per defecte!
   const res = await fetch("http://localhost:8000/tasks/", {

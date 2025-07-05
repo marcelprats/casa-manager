@@ -1,0 +1,173 @@
+/* TaskDetail.css */
+:root {
+  --modal-bg: rgba(24, 24, 28, 0.6);
+  --card-bg: #ffffff;
+  --primary: #0d2b4c;
+  --secondary: #2a3b5a;
+  --accent: #4f9aff;
+  --success: #2ecc71;
+  --warning: #f1c40f;
+  --error: #e74c3c;
+  --gray-light: #f5f6fa;
+}
+
+.task-detail-modal {
+  position: fixed;
+  inset: 0;
+  background: var(--modal-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.task-detail-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 480px;
+  overflow: hidden;
+  animation: detail-fadein 0.2s ease-out;
+  position: relative;
+}
+
+@keyframes detail-fadein {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* Header */
+.task-detail-header {
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  color: #fff;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.task-detail-header h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.3em 0.8em;
+  border-radius: 1.2em;
+  background: var(--warning);
+  color: #fff;
+  text-transform: uppercase;
+}
+.badge.done { background: var(--success); }
+.badge.pending { background: var(--warning); }
+
+/* Header actions (estado + icona X) */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+/* Botó de la X al header */
+.task-detail-close-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.1s;
+}
+.task-detail-close-btn:hover {
+  color: #fff;
+  transform: scale(1.5);
+  background: transparent;
+}
+
+/* Metadades */
+.task-detail-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  font-size: 0.95rem;
+  color: var(--secondary);
+}
+.task-detail-meta div {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+/* Descripció */
+.task-detail-desc {
+  background: var(--gray-light);
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  color: var(--secondary);
+  line-height: 1.4;
+}
+
+/* Usuaris */
+.task-detail-users {
+  padding: 1rem 1.5rem 1.5rem;
+}
+.task-detail-users h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--primary);
+}
+.task-detail-users ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.user-chip {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 0.4em 0.9em;
+  border-radius: 1em;
+  border: 1px solid rgba(79, 154, 255, 0.5);
+  transition: transform 0.15s;
+}
+.user-chip:hover {
+  transform: scale(1.05);
+}
+.user-chip.empty {
+  background: #ddd;
+  color: #777;
+  border-color: #ccc;
+}
+
+/* Loading i errors */
+.task-detail-card.loading,
+.task-detail-card.error {
+  padding: 2rem;
+  text-align: center;
+}
+.spinner {
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto 1rem;
+  border: 4px solid #ddd;
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

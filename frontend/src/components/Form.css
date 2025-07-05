@@ -1,0 +1,166 @@
+:root {
+  --modal-bg: rgba(24, 24, 28, 0.6);
+  --card-bg: #ffffff;
+  --primary: #0d2b4c;
+  --secondary: #2a3b5a;
+  --accent: #4f9aff;
+  --success: #2ecc71;
+  --warning: #f1c40f;
+  --error: #e74c3c;
+  --gray-light: #f5f6fa;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--modal-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.modal-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 480px;
+  overflow: hidden;
+  animation: detail-fadein 0.2s ease-out;
+  position: relative;
+}
+
+@keyframes detail-fadein {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.modal-form {
+  margin: 0;
+}
+
+.form-header {
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  color: #fff;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-header h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.1s;
+}
+
+.btn-close:hover {
+  color: var(--warning);
+  transform: scale(1.2);
+}
+
+.form-body {
+  padding: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+  color: var(--secondary);
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.6em 0.8em;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  background: var(--gray-light);
+}
+
+.user-assign-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-chip {
+  display: inline-flex;
+  align-items: center;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 0.4em 0.9em;
+  border-radius: 1em;
+  border: 1px solid rgba(79, 154, 255, 0.5);
+  position: relative;
+}
+
+.user-chip.empty {
+  background: #ddd;
+  color: #777;
+  border-color: #ccc;
+}
+
+.user-remove-btn {
+  background: transparent;
+  border: none;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  padding: 1.5rem;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 0.6em 1.2em;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--accent);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--secondary);
+  color: var(--secondary);
+  padding: 0.6em 1.2em;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-secondary:hover {
+  background: var(--secondary);
+  color: #fff;
+}

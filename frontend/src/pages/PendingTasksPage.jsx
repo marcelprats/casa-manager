@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { fetchTasks } from "../api";
+import { fetchTasks, fetchTask } from "../api";
+import TaskDetail from "../components/TaskDetail";
 import "./PendingTasksPage.css";
 
 function groupTasksByMonthAndDay(tasks) {
@@ -34,12 +35,14 @@ function formatDay(dateStr) {
   };
 }
 
-export default function PendingTasksCalendarList() {
+export default function PendingTasksCalendarList({ users }) {
   const [groupedTasks, setGroupedTasks] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [taskDetailId, setTaskDetailId] = useState(null);
 
   useEffect(() => {
+    setLoading(true);
     fetchTasks()
       .then(tasks => {
         const tasques = Array.isArray(tasks) ? tasks : tasks.tasks || [];
@@ -56,8 +59,18 @@ export default function PendingTasksCalendarList() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <div className="pending-tasks-container"><p>Carregant...</p></div>;
-  if (error) return <div className="pending-tasks-container"><div style={{ color: "red" }}>{error}</div></div>;
+  if (loading)
+    return (
+      <div className="pending-tasks-container">
+        <p>Carregant...</p>
+      </div>
+    );
+  if (error)
+    return (
+      <div className="pending-tasks-container">
+        <div style={{ color: "red" }}>{error}</div>
+      </div>
+    );
 
   const sortedMonths = Object.keys(groupedTasks).sort();
 
@@ -70,35 +83,52 @@ export default function PendingTasksCalendarList() {
           {sortedMonths.map(monthKey => (
             <div key={monthKey}>
               <div className="calendar-header">{formatMonth(monthKey)}</div>
-              {Object.keys(groupedTasks[monthKey]).sort().map(dayKey => {
-                const { day, short } = formatDay(dayKey);
-                return (
-                  <div key={dayKey} className="calendar-day-row">
-                    <div className="calendar-day-info">
-                      <div className="calendar-day-number">{day}</div>
-                      <div className="calendar-day-short">{short}</div>
+              {Object.keys(groupedTasks[monthKey])
+                .sort()
+                .map(dayKey => {
+                  const { day, short } = formatDay(dayKey);
+                  return (
+                    <div key={dayKey} className="calendar-day-row">
+                      <div className="calendar-day-info">
+                        <div className="calendar-day-number">{day}</div>
+                        <div className="calendar-day-short">{short}</div>
+                      </div>
+                      <div className="calendar-tasks-list">
+                        {groupedTasks[monthKey][dayKey].map(t => (
+                          <div
+                            key={t.id}
+                            className="calendar-task-card"
+                            onClick={() => setTaskDetailId(t.id)}
+                            style={{ cursor: "pointer" }}
+                            title="Veure detall"
+                          >
+                            <div className="calendar-task-title">{t.titol}</div>
+                            {t.data_fi && (
+                              <span className="calendar-task-time">
+                                {t.data_fi.length > 10
+                                  ? new Date(t.data_fi).toLocaleTimeString("ca-ES", { hour: "2-digit", minute: "2-digit" })
+                                  : ""}
+                              </span>
+                            )}
+                            <div className="calendar-task-desc">{t.descripcio}</div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <div className="calendar-tasks-list">
-                      {groupedTasks[monthKey][dayKey].map(t => (
-                        <div key={t.id} className="calendar-task-card">
-                          <div className="calendar-task-title">{t.titol}</div>
-                          {t.data_fi && (
-                            <span className="calendar-task-time">
-                              {t.data_fi.length > 10
-                                ? new Date(t.data_fi).toLocaleTimeString("ca-ES", { hour: "2-digit", minute: "2-digit" })
-                                : ""}
-                            </span>
-                          )}
-                          <div className="calendar-task-desc">{t.descripcio}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           ))}
         </div>
+      )}
+      {/* MODAL DE DETALL */}
+      {taskDetailId && (
+        <TaskDetail
+          taskId={taskDetailId}
+          fetchTask={fetchTask}
+          users={users}
+          onClose={() => setTaskDetailId(null)}
+        />
       )}
     </div>
   );

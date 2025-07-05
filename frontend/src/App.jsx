@@ -71,7 +71,9 @@ export default function App() {
             <Route path="/" element={<Home selectedUser={selectedUser} />} />
             <Route
               path="/calendar"
-              element={<CalendarPage selectedUser={selectedUser} />}/>
+              element={<CalendarPage selectedUser={selectedUser}
+              users={users}
+               />}/>
 
             <Route path="/pendents" element={<PendingTasksPage />} />
 
